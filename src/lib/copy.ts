@@ -74,6 +74,13 @@ export const reflection = {
   onlyNow: (after: string) => `지금: ${after}`,
 } as const
 
+/** 첫 반응과 지금의 비교 문구. 어떤 해석 문구도 덧붙이지 않는다. */
+export function compareLabel(before: Reaction | null, after: Reaction): string {
+  if (before === null) return reflection.onlyNow(reactionLabels[after])
+  if (before === after) return reflection.same
+  return reflection.compare(reactionLabels[before], reactionLabels[after])
+}
+
 export const returnButton = {
   label: '현재로 돌아가기',
 } as const

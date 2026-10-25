@@ -1,0 +1,17 @@
+.caption {
+  margin: 0;
+  padding: 12px 20px;
+  text-align: center;
+  font-size: 15px;
+  color: var(--color-fg-muted);
+  animation: caption-in 400ms var(--ease-out) both;
+}
+
+@keyframes caption-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
