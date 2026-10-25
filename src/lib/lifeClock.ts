@@ -35,6 +35,19 @@ export function ageFromBirthDate(birthDate: string, today: Date = new Date()): n
   return Math.max(0, days / YEAR_DAYS)
 }
 
+export type BirthDateError = 'required' | 'future' | 'tooOld'
+
+/** 온보딩 유효성: 과거 날짜, 100세 미만. */
+export function validateBirthDate(value: string, today: Date = new Date()): BirthDateError | null {
+  if (!value) return 'required'
+  const date = parseBirthDate(value)
+  if (!date) return 'required'
+  const startOfToday = new Date(today.getFullYear(), today.getMonth(), today.getDate())
+  if (date.getTime() >= startOfToday.getTime()) return 'future'
+  if (ageFromBirthDate(value, today) >= LIFE_SPAN_YEARS) return 'tooOld'
+  return null
+}
+
 export function clampAge(age: number): number {
   return Math.min(LIFE_SPAN_YEARS, Math.max(0, age))
 }
@@ -179,8 +192,9 @@ export interface Delta {
 export function computeDelta(exploreAge: number, currentAge: number): Delta {
   const position = classifyPosition(exploreAge, currentAge)
   const diffYears = exploreAge - currentAge
-  const absMin = (Math.abs(diffYears) / LIFE_SPAN_YEARS) * MINUTES_PER_DAY
   const years = Math.round(Math.abs(diffYears))
+  // 분은 반올림한 년수 기준으로 계산해 "20년 전 (-4시간 48분)"처럼 문구가 서로 맞게 한다.
+  const absMin = (years / LIFE_SPAN_YEARS) * MINUTES_PER_DAY
   let h = Math.floor(absMin / 60)
   let m = Math.round(absMin - h * 60)
   if (m === 60) {

@@ -1,0 +1,53 @@
+.app {
+  min-height: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding-top: max(20px, env(safe-area-inset-top));
+  padding-bottom: max(20px, env(safe-area-inset-bottom));
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.top {
+  min-height: 84px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 0;
+}
+
+.clock {
+  width: var(--clock-size);
+  height: var(--clock-size);
+}
+
+.bottom {
+  position: relative;
+  min-height: 236px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.onboardingCenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 0;
+}
+
+@media (min-height: 760px) {
+  .bottom {
+    min-height: 260px;
+  }
+}

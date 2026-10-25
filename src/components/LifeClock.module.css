@@ -1,0 +1,196 @@
+.svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  color: var(--color-fg);
+  overflow: visible;
+}
+
+.bezelBand {
+  fill: none;
+  stroke: currentColor;
+  stroke-opacity: 0.045;
+}
+
+.dial {
+  fill: none;
+  stroke: currentColor;
+  stroke-opacity: 0.55;
+  stroke-width: 1.5;
+}
+
+.tick {
+  stroke: currentColor;
+  stroke-opacity: 0.35;
+  stroke-width: 1;
+  stroke-linecap: round;
+}
+
+.tickMajor {
+  stroke: currentColor;
+  stroke-opacity: 0.8;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.label {
+  fill: currentColor;
+  fill-opacity: 0.75;
+  font-size: 15px;
+  font-variant-numeric: tabular-nums;
+  text-anchor: middle;
+  dominant-baseline: central;
+  pointer-events: none;
+}
+
+.arc {
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-opacity: 0.35;
+  stroke-width: 3;
+  stroke-linecap: round;
+  pointer-events: none;
+}
+
+.marker path {
+  fill: var(--color-accent);
+}
+
+.marker {
+  transition: transform 600ms var(--ease-out);
+  pointer-events: none;
+}
+
+.dot {
+  pointer-events: none;
+  transition: opacity 200ms ease;
+}
+
+.dot circle {
+  transition: r 180ms ease;
+}
+
+.dotPast circle {
+  fill: var(--color-dot-past);
+}
+
+.dotFuture circle {
+  fill: var(--color-dot-future);
+}
+
+.dotGlow {
+  fill-opacity: 0.35;
+}
+
+.dotHidden {
+  opacity: 0;
+}
+
+.dotReveal {
+  animation: dot-reveal 420ms var(--ease-out) both;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@keyframes dot-reveal {
+  0% {
+    opacity: 0;
+    transform: scale(0.2);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.6);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.hand {
+  outline: none;
+  cursor: default;
+}
+
+.hand line {
+  stroke: currentColor;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+
+.handTip {
+  fill: currentColor;
+}
+
+.hand:focus-visible {
+  outline: none;
+}
+
+.hand:focus-visible line {
+  stroke: var(--color-accent);
+  stroke-width: 3.5;
+}
+
+.hand:focus-visible .handTip {
+  fill: var(--color-accent);
+}
+
+.hub {
+  fill: currentColor;
+  pointer-events: none;
+}
+
+.pulse {
+  fill: currentColor;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: pulse var(--dur-pulse) ease-out infinite;
+  pointer-events: none;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+}
+
+.tooltip {
+  pointer-events: none;
+  animation: tooltip-in 160ms ease-out both;
+}
+
+.tooltip rect {
+  fill: var(--color-card);
+  stroke: var(--color-card-border);
+  stroke-width: 1;
+}
+
+.tooltip text {
+  fill: var(--color-card-fg);
+  text-anchor: middle;
+  dominant-baseline: central;
+}
+
+@keyframes tooltip-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pulse {
+    animation: none;
+    opacity: 0;
+  }
+}
