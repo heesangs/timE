@@ -1,0 +1,64 @@
+/* 디자인 토큰. 색상은 디자인 단계에서 조정 가능하도록 전부 변수로 둔다. */
+:root {
+  /* 배경 톤 키 포인트 (tone.ts가 같은 값을 사용) */
+  --tone-midnight: #0b1020;
+  --tone-dawn: #b8c4d6;
+  --tone-noon: #fff4d6;
+  --tone-dusk: #e8a06b;
+
+  /* 동적 색 (App이 바늘 시각에 맞춰 갱신) */
+  --color-bg: #0b1020;
+  --color-fg: #f4f1ec;
+  --color-fg-muted: rgba(244, 241, 236, 0.62);
+
+  /* 고정 색 */
+  --color-accent: #e0665e;
+  --color-dot-past: #6b7fd7;
+  --color-dot-future: #f0a24f;
+  --color-card: rgba(255, 255, 255, 0.78);
+  --color-card-fg: #1a1a2e;
+  --color-card-fg-muted: rgba(26, 26, 46, 0.6);
+  --color-card-border: rgba(26, 26, 46, 0.08);
+  --color-chip: rgba(26, 26, 46, 0.06);
+  --color-chip-active: rgba(26, 26, 46, 0.14);
+  --color-dial: currentColor;
+
+  /* 글꼴 */
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Pretendard', 'Apple SD Gothic Neo',
+    'Noto Sans KR', 'Segoe UI', Roboto, sans-serif;
+
+  /* 모션 */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --hand-transition-ms: 800ms;
+  --dur-card: 250ms;
+  --dur-flight: 600ms;
+  --dur-pulse: 2000ms;
+
+  /* 레이아웃 */
+  --max-width: 480px;
+  --radius-card: 20px;
+  --clock-size: min(80vmin, 420px);
+}
+
+/* 어두운 배경(밝기 L < 50%)에서는 App이 data-theme="dark"를 건다. */
+:root[data-theme='dark'] {
+  --color-fg: #f4f1ec;
+  --color-fg-muted: rgba(244, 241, 236, 0.62);
+  --color-card: rgba(22, 26, 44, 0.78);
+  --color-card-fg: #f4f1ec;
+  --color-card-fg-muted: rgba(244, 241, 236, 0.6);
+  --color-card-border: rgba(244, 241, 236, 0.1);
+  --color-chip: rgba(244, 241, 236, 0.1);
+  --color-chip-active: rgba(244, 241, 236, 0.22);
+}
+
+:root[data-theme='light'] {
+  --color-fg: #1a1a2e;
+  --color-fg-muted: rgba(26, 26, 46, 0.6);
+  --color-card: rgba(255, 255, 255, 0.78);
+  --color-card-fg: #1a1a2e;
+  --color-card-fg-muted: rgba(26, 26, 46, 0.6);
+  --color-card-border: rgba(26, 26, 46, 0.08);
+  --color-chip: rgba(26, 26, 46, 0.06);
+  --color-chip-active: rgba(26, 26, 46, 0.14);
+}
