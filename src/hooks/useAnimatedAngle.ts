@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { motionMs } from '../lib/motion'
 
 /** cubic-bezier(0.22, 1, 0.36, 1) ≈ easeOutQuint */
 function easeOutQuint(t: number): number {
@@ -19,9 +20,7 @@ export function useAnimatedAngle(target: number, durationMs: number): number {
     cancelAnimationFrame(rafRef.current)
     const from = valueRef.current
     const to = target
-    const reduced =
-      typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const duration = reduced ? 0 : durationMs
+    const duration = motionMs(durationMs)
 
     if (duration <= 0 || Math.abs(to - from) < 0.01) {
       valueRef.current = to

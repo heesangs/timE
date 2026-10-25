@@ -18,6 +18,7 @@ import {
 } from './lib/lifeClock'
 import { rgbToHex, themeForBackground, toneAtMinutes } from './lib/tone'
 import { clearAppData, createAppData, loadAppData, saveAppData } from './lib/storage'
+import { motionMs } from './lib/motion'
 import { reset as resetCopy } from './lib/copy'
 import { useDwell } from './hooks/useDwell'
 import { useAnimatedAngle } from './hooks/useAnimatedAngle'
@@ -190,7 +191,7 @@ export default function App() {
   // ---- 첫 반응 질문 (첫 방문, NOW에서 바늘이 멈춘 뒤 2초) -----------------
   const [firstReactionOpen, setFirstReactionOpen] = useState(false)
   const firstReactionPending = ui.phase === 'NOW' && data !== null && data.firstReactionAskedAt === null
-  const firstReactionDelay = ui.handTransitionMs + FIRST_REACTION_DELAY_MS
+  const firstReactionDelay = motionMs(ui.handTransitionMs) + FIRST_REACTION_DELAY_MS
   useEffect(() => {
     if (!firstReactionPending) return
     const id = window.setTimeout(() => {
@@ -248,7 +249,7 @@ export default function App() {
 
   // ---- 귀환과 관점 질문 ---------------------------------------------------
   const onReturn = () => dispatch({ type: 'RETURN_TO_NOW', currentAngle })
-  const reflectionReady = useDwell(ui.phase === 'REFLECTION', ui.handTransitionMs + 100)
+  const reflectionReady = useDwell(ui.phase === 'REFLECTION', motionMs(ui.handTransitionMs) + 100)
   const reflectionTimer = useRef<number | null>(null)
   useEffect(() => {
     if (ui.phase !== 'REFLECTION' && reflectionTimer.current !== null) {

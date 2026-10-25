@@ -1,4 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { motionMs } from '../lib/motion'
 import styles from './DotFlight.module.css'
 
 export interface Point {
@@ -16,10 +17,6 @@ export interface DotFlightProps {
 }
 
 const FLIGHT_MS = 600
-
-function prefersReducedMotion(): boolean {
-  return typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
-}
 
 /**
  * 제출한 텍스트가 축소되며 해당 각도의 시계 테두리로 날아가 점으로 박히는 모션.
@@ -49,7 +46,7 @@ export function DotFlight({ text, fromRect, to, onDone }: DotFlightProps) {
   }, [])
 
   useEffect(() => {
-    const ms = prefersReducedMotion() ? 0 : FLIGHT_MS
+    const ms = motionMs(FLIGHT_MS)
     const id = window.setTimeout(() => onDoneRef.current(), ms + 40)
     return () => window.clearTimeout(id)
   }, [])
